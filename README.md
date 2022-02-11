@@ -15,5 +15,5 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+For live Preview [https://react-graphql-jade.vercel.app/](https://react-graphql-jade.vercel.app/) Click URL
 
-## [Simple Guide Lines](./GuideLines.md)

@@ -8,15 +8,17 @@ interface IComponentMapperProps {
   data: ITitleLayout[]
 }
 export default function ComponentMapper({copomentType, data}: IComponentMapperProps) {
-  const [editorInfo, setSditorInfo] = useState<{isShow: boolean, id?: string}>();
+  const [editorInfo, setSditorInfo] = useState<{isShow: boolean, isSwitch: boolean, id?: string}>();
   const Component = DesignerComponent[copomentType];
 
   const onEditorShow = (id?: string): void => {
     onEditorHide();
-    setSditorInfo({isShow: true, id})
+    const isSwitch = !!editorInfo?.isSwitch; 
+    setSditorInfo( {isShow: true, isSwitch: !isSwitch, id})
   }
   const onEditorHide =() => {
-    setSditorInfo({isShow: false, id: undefined})
+    const isSwitch = !!editorInfo?.isSwitch;
+    setSditorInfo({isShow: false, isSwitch: !isSwitch,  id: undefined})
   }
   return (
     <Row style={{width: '100%', height: '100%'}}>
@@ -26,7 +28,8 @@ export default function ComponentMapper({copomentType, data}: IComponentMapperPr
       { editorInfo?.isShow && 
         <Col style={{width: '100%', height: '100%'}} span={18} className="editor-layout">
           <>{ editorInfo?.id && <Component id={editorInfo?.id} data={data} hideEditor={onEditorHide}/>  }</>
-          <> { !editorInfo?.id && <Component hideEditor={onEditorHide} />  }</>
+          <> { !editorInfo?.id  && editorInfo.isSwitch &&  <Component hideEditor={onEditorHide} />  }</>
+          <> { !editorInfo?.id  && !editorInfo.isSwitch &&  <Component hideEditor={onEditorHide} />  }</>
        </Col>
       }
     </Row>
