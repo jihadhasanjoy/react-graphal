@@ -4,7 +4,7 @@ import { ITitleLayout } from "@/models/common";
 import React from "react";
 export default function Comments() {
   return (
-    <BaseLayout>
+    <BaseLayout selectedKey='3'>
     <ComponentMapper copomentType='comment' data={defaultData} />
    </BaseLayout>
   );

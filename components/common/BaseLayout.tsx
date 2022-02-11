@@ -2,9 +2,10 @@ import { Layout } from "antd";
 import React, { useEffect, useState } from "react";
 import Header from './Header';
 import Loader from "./Loader";
-import Navbar from "./Navbar";
+import Navbar, { ISelectedKey } from "./Navbar";
 export interface ILayoutProps  { 
-  children: React.ReactNode
+  children: React.ReactNode,
+  selectedKey: ISelectedKey
 }
 const { Sider } = Layout;
 
@@ -24,7 +25,7 @@ export default function BaseLayout(props: ILayoutProps) {
     <Header/>
     <Layout>
     <Sider width={200} className="site-layout-background">
-     <Navbar/>
+     <Navbar selectedKey={props.selectedKey}/>
     </Sider>
     <Layout>
       {props.children}

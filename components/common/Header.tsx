@@ -2,6 +2,7 @@ import { Layout, Menu } from "antd";
 import Link from "next/link";
 import React from "react";
 const { Header } = Layout;
+
 export default function HeaderComponent() {
   return (
     <Header className="header customer-header">

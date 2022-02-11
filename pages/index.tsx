@@ -16,7 +16,7 @@ export default function Index() {
   }, [data]);
   
   return (
-    <BaseLayout>
+    <BaseLayout selectedKey='1'>
      <ComponentMapper copomentType='user' data={users} />
     </BaseLayout>
    

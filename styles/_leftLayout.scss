@@ -3,6 +3,9 @@
     border: 0.4px solid #687074;
     padding: 10px 10px;
     background-color: white;
+    position: absolute;
+    overflow-y: auto;
+    width: 100%;
     .left-title{
       cursor: pointer;
       margin-bottom: 5px;
