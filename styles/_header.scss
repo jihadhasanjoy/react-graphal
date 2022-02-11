@@ -1,0 +1,23 @@
+.customer-header {
+  background-color: $primary-color !important;
+  padding: 0 20px !important;
+  ul {
+    background-color: $primary-color !important;
+    .ant-menu-item-selected {
+      background-color: $primary-active !important;
+    }
+    .ant-menu-overflow-item{
+      color: $white !important;
+    }
+  }
+}
+
+.logo {
+  float: left;
+  width: 180px;
+  height: 31px;
+  color: $white;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+}
