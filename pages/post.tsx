@@ -1,22 +1,12 @@
 import BaseLayout from '@/components/common/BaseLayout';
 import ComponentMapper from '@/components/ComponentMapper';
-import { ITitleLayout } from '@/models/common';
+import { usePosts } from '@/hooks/userPosts';
 import React from "react";
 export default function Posts() {
+  const {data, loading} = usePosts();
   return (
     <BaseLayout selectedKey='2'>
-     <ComponentMapper copomentType='post' data={defaultData} />
+     <ComponentMapper isFetching={loading} copomentType='post' data={data} />
     </BaseLayout>
   );
 }
-
-const defaultData: ITitleLayout[] = [
-  {
-   title: 'Post 1',
-   id: '1'
-  },
-  {
-    title: 'Post 2',
-    id: '2'
-   }
-]

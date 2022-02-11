@@ -15,3 +15,10 @@ html{
 .ant-layout .ant-layout-has-sider{
     min-height:  calc(100vh - 65px);
 }
+
+.ant-spin-nested-loading{
+    height: 100%;
+    .ant-spin-container{
+        height: 100%;
+    }
+}

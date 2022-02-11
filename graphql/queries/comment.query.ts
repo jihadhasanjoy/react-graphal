@@ -1,12 +1,9 @@
-import {gql} from "@apollo/client";
+import { gql } from "@apollo/client";
 
 export const GET_COMMENTS = gql`
 query getComments {
   comments {
     id
-    post {
-      id
-    }
     data {
       body
     }

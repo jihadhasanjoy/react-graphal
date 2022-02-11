@@ -5,9 +5,10 @@ import React, { useState } from "react";
 import TitleLayout from "./single/TitleLayout";
 interface IComponentMapperProps {
   copomentType: 'user' | 'post' | 'comment';
-  data: ITitleLayout[]
+  data: ITitleLayout[],
+  isFetching: boolean;
 }
-export default function ComponentMapper({copomentType, data}: IComponentMapperProps) {
+export default function ComponentMapper({copomentType, isFetching, data}: IComponentMapperProps) {
   const [editorInfo, setSditorInfo] = useState<{isShow: boolean, isSwitch: boolean, id?: string}>();
   const Component = DesignerComponent[copomentType];
 
@@ -23,7 +24,7 @@ export default function ComponentMapper({copomentType, data}: IComponentMapperPr
   return (
     <Row style={{width: '100%', height: '100%'}}>
       <Col style={{width: '100%', height: '100%'}} span={6}>
-       <TitleLayout showEditor={onEditorShow} hideEditor={onEditorHide} layoutData={data} />
+       <TitleLayout isFetching={isFetching} showEditor={onEditorShow} hideEditor={onEditorHide} layoutData={data} />
       </Col>
       { editorInfo?.isShow && 
         <Col style={{width: '100%', height: '100%'}} span={18} className="editor-layout">
