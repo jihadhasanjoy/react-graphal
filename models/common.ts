@@ -6,4 +6,5 @@ export interface ITitleLayout{
 export interface IRightLayoutProps{
     id?: string;
     hideEditor: () => void;
+    data?: ITitleLayout[];
 }

@@ -1,7 +1,7 @@
 import { Layout } from "antd";
 import React, { useEffect, useState } from "react";
 import Header from './Header';
-import Loader from './Loader';
+import Loader from "./Loader";
 import Navbar from "./Navbar";
 export interface ILayoutProps  { 
   children: React.ReactNode

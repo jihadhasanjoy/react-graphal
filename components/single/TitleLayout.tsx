@@ -1,21 +1,33 @@
-import { InsertRowAboveOutlined } from '@ant-design/icons';
-import React from "react";
 import { ITitleLayout } from "@/models/common";
+import { InsertRowAboveOutlined } from '@ant-design/icons';
+import { Button, Popconfirm } from 'antd';
+import React from "react";
 
 export interface ITileLayoutProps{
     layoutData: ITitleLayout[];
-    showEditor: (id: string) => void;
+    showEditor: (id?: string) => void;
+    hideEditor: () => void;
 }
 
-export default function TitleLayouts({layoutData, showEditor}: ITileLayoutProps) {
+export default function TitleLayouts({layoutData, showEditor, hideEditor}: ITileLayoutProps) {
   return (
     <div className="left-layout">
-    {layoutData.map(layout =>(
-        <h5 className="left-title text-truncate" onClick={() =>showEditor(layout.id)} key={layout.id}>
+    <Button className="mb-3" type="primary" onClick={() => showEditor()} block>Create New</Button>
+    {layoutData.map(layout =>(       
+        <Popconfirm
+        title="Are you sure to edit this task?"
+        onConfirm={() =>showEditor(layout.id)}
+        okText="Yes"
+        cancelText="No"
+        key={layout.id}
+      >
+        <h5 onClick={() => hideEditor()} className="left-title text-truncate">
           <span className="icon"><InsertRowAboveOutlined /></span>
           {layout.title}
-        </h5>
+        </h5>  
+      </Popconfirm>   
     ))}
+      
     </div>
   );
 }

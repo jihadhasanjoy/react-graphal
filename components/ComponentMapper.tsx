@@ -11,7 +11,8 @@ export default function ComponentMapper({copomentType, data}: IComponentMapperPr
   const [editorInfo, setSditorInfo] = useState<{isShow: boolean, id?: string}>();
   const Component = DesignerComponent[copomentType];
 
-  const onEditorShow = (id: string): void => {
+  const onEditorShow = (id?: string): void => {
+    onEditorHide();
     setSditorInfo({isShow: true, id})
   }
   const onEditorHide =() => {
@@ -20,11 +21,12 @@ export default function ComponentMapper({copomentType, data}: IComponentMapperPr
   return (
     <Row style={{width: '100%', height: '100%'}}>
       <Col style={{width: '100%', height: '100%'}} span={6}>
-       <TitleLayout showEditor={onEditorShow} layoutData={data} />
+       <TitleLayout showEditor={onEditorShow} hideEditor={onEditorHide} layoutData={data} />
       </Col>
       { editorInfo?.isShow && 
-        <Col style={{width: '100%', height: '100%'}} span={18} className="right-layout">
-          <Component id={editorInfo?.id} hideEditor={onEditorHide}/>
+        <Col style={{width: '100%', height: '100%'}} span={18} className="editor-layout">
+          <>{ editorInfo?.id && <Component id={editorInfo?.id} data={data} hideEditor={onEditorHide}/>  }</>
+          <> { !editorInfo?.id && <Component hideEditor={onEditorHide} />  }</>
        </Col>
       }
     </Row>
