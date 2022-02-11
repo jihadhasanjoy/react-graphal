@@ -47,9 +47,7 @@ export default function PostEditor({id, hideEditor}: IRightLayoutProps) {
       payload: {
           title: values.title,
           body: {html: values.body}
-      },
-      connect: {comment_ids: values?.comments?.length?values.comments:null},
-      status: "published"
+      }
       }}).then(res => {
           setPageLoading(false);
           Modal.success({content: 'Post created successfully',
@@ -68,8 +66,7 @@ export default function PostEditor({id, hideEditor}: IRightLayoutProps) {
       payload: {
           title: values.title,
           body: {html: values.body}
-      },
-      connect: {comment_ids: values.comments},
+      }
       }}).then(res => {
          setPageLoading(false);
           Modal.success({content: 'Post updated successfully'})
@@ -93,7 +90,7 @@ export default function PostEditor({id, hideEditor}: IRightLayoutProps) {
     <Spin spinning={loading || pageLoading}>
      <Form form={form} layout="vertical"
         style={{ height: "100%" }} onFinish={onFormSubmit} labelCol={{ span: 24 }} wrapperCol={{ span: 24 }}>       
-        <FormHeader title="Edit a Post" buttonText={id ? 'Update' : 'Create'} />
+        <FormHeader title={ (id ? 'Edit' : 'Create') + ' a Post'} buttonText={id ? 'Update' : 'Create'} />
         <Row className="form-content">
           <Col span={24}>
             <Form.Item name="title"  label="Title" rules={[{ required: true, message: 'Please input title' }, { message: 'Name maximum 66 charecters', max: 66 }]}>

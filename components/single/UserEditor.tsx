@@ -66,7 +66,7 @@ export default function UserEditor({id, hideEditor , data}: IRightLayoutProps) {
     <>
      <Form form={form} layout="vertical"
         style={{ height: "100%" }} onFinish={onFormSubmit} labelCol={{ span: 24 }} wrapperCol={{ span: 24 }}>       
-        <FormHeader title="Edit a User" buttonText={id ? 'Update' : 'Create'} />
+        <FormHeader title={ (id ? 'Edit' : 'Create') + ' a User'} buttonText={id ? 'Update' : 'Create'} />
         <Row className="form-content">
           <Col span={24}>
             <Form.Item name="phone"  label="Phone" rules={[{ required: true, message: 'Please input phone number' }, { message: 'Phone maximum 15 charecters', max: 15 }]}>

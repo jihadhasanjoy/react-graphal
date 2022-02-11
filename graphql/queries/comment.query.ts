@@ -17,9 +17,6 @@ query getComment($id: String!) {
     id
     post {
       id
-      data {
-        title
-      }
     }
     data {
       body

@@ -1,7 +1,7 @@
 export interface ICreateComment{
-    title: string;
+    id?: string;
     body: string;
-    comment: string;
+    posts: string;
 }
 
 export interface ICommentResponse{
@@ -14,3 +14,16 @@ export interface ICommentData{
     },
     id: string;
 }
+
+
+export interface ISingleCommentResponse{
+    comment: {
+      post: {
+          id: string;
+      };
+      data: {
+        body: string
+      },
+      id: string;
+    }
+  }
