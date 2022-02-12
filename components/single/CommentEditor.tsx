@@ -3,7 +3,7 @@ import { usePosts } from "@/hooks/userPosts";
 import { ICreateComment } from "@/models/comment.model";
 import { IRightLayoutProps } from "@/models/common";
 import { useMutation } from "@apollo/client";
-import { Col, Form, Modal, Row, Select, Spin } from "antd";
+import { Col, Form, Input, Modal, Row, Select, Spin } from "antd";
 import { CREATE_COMMENT, UPDATE_COMMENT } from "graphql/mutations/comment.mutation";
 import { GET_COMMENTS } from "graphql/queries/comment.query";
 import dynamic from "next/dynamic";
@@ -14,26 +14,26 @@ const SunEditor = dynamic(() => import("suneditor-react"), {
   ssr: false
 });
 
+const { TextArea } = Input;
 export default function CommentEditor({id, hideEditor}: IRightLayoutProps) {
   const [form] = Form.useForm<ICreateComment>();
-  const [content, setContent] = useState<string>();
   const [pageLoading, setPageLoading] = useState(false);
   const {data: posts} = usePosts();
   const {data, loading} = id ? useCommentById(id) : {data: undefined, loading: false};
 
   const [updateCommentMutation] = useMutation(UPDATE_COMMENT,{
     refetchQueries: [
-        GET_COMMENTS
+        GET_COMMENTS,
   ]})
     
-  const [createComment] = useMutation(CREATE_COMMENT,{
+  const [createCommentMutation] = useMutation(CREATE_COMMENT,{
     refetchQueries: [
         GET_COMMENTS
   ]})
 
   const onCreateComment = (values: any): void =>{
     setPageLoading(true);
-    createComment({variables: {
+    createCommentMutation({variables: {
       payload: {body: values.body},
       connect: {post_id: values.post},
       status: "published"
@@ -59,8 +59,7 @@ export default function CommentEditor({id, hideEditor}: IRightLayoutProps) {
     updateCommentMutation({variables: {
       id,
       payload: {body: values.body},
-      connect: {post_id: values.post},
-      status: "published"
+      connect: {post: values.post}
       }}).then(res => {
       hideEditor()
       setPageLoading(false);
@@ -77,9 +76,7 @@ export default function CommentEditor({id, hideEditor}: IRightLayoutProps) {
   }
   
   useEffect(() => {
-    console.log(data);
     if(!data) {return}
-    setContent(data?.body)
     form.setFieldsValue({posts: data?.post, body: data?.body  })
   }, [data]);
   
@@ -98,7 +95,7 @@ export default function CommentEditor({id, hideEditor}: IRightLayoutProps) {
         <Row className="form-content">
           <Col span={24}>
             <Form.Item name="body"  label="Body">
-                <SunEditor setContents={content} onChange={(val) => {setContent(val)}} />
+               <TextArea rows={4} ></TextArea>
             </Form.Item>
           </Col>
 

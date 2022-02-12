@@ -1,7 +1,7 @@
-import {gql} from "@apollo/client";
+import { gql } from "@apollo/client";
 
 export const CREATE_COMMENT = gql`
-mutation create($payload: comment_create_payload!, $connect: comment_input_connection_payload, $status: STATUS_TYPE_ENUM) {
+mutation create($payload: comment_create_payload!, $connect: comment_input_connection_payload) {
   createComment(payload: $payload, connect: $connect, status: $status) {
     id
     data {
@@ -9,24 +9,18 @@ mutation create($payload: comment_create_payload!, $connect: comment_input_conne
     }
     post {
       id
-      data {
-        title
-      }
     }
   }
 }`;
 export const UPDATE_COMMENT = gql`
-mutation update($id: String!, $connect: comment_input_connection_payload, $payload: comment_update_payload, $status: STATUS_TYPE_ENUM) {
-  updateComment(_id: $id, connect: $connect, payload: $payload, status: $status) {
+mutation update($id: String!, $connect: comment_input_connection_payload, $payload: comment_update_payload) {
+  updateComment(_id: $id, connect: $connect, payload: $payload) {
     data {
       body
     }
     id
     post {
       id
-      data {
-        title
-      }
     }
   }
 }`;

@@ -16,7 +16,6 @@ export function useCommentById(id: string): {data?: IComment, loading: boolean}{
   });
   useEffect(() => {
     if(data){
-      
       const post = data?.comment?.post?.id;
       const id = data?.comment?.id;
       const body = data.comment.data.body;
